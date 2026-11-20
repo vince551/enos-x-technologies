@@ -173,18 +173,28 @@ export function Logo() {
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
+    const closeOnOutsideTap = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
 
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOnOutsideTap);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOnOutsideTap);
+    };
   }, []);
 
   return (
-    <header className="enosx-header fixed inset-x-0 top-0 z-50">
+    <header ref={headerRef} className="enosx-header fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           to="/"
@@ -249,39 +259,50 @@ export function Header() {
 
       <div
         id="enosx-mobile-navigation"
-        className={`enosx-mobile-menu absolute inset-x-3 top-[calc(100%+0.65rem)] overflow-hidden rounded-2xl p-3 transition-all duration-300 md:hidden ${
+        className={`enosx-mobile-menu absolute right-3 top-[calc(100%+0.7rem)] w-[min(22rem,calc(100vw-1.5rem))] overflow-hidden rounded-[1.35rem] transition-all duration-300 md:hidden ${
           menuOpen
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-2 opacity-0"
+            ? "visible translate-y-0 scale-100 opacity-100"
+            : "invisible -translate-y-2 scale-[.98] opacity-0"
         }`}
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
       >
-        <nav aria-label="Mobile navigation" className="flex flex-col">
-          {nav.map((item) => (
+        <div className="enosx-menu-heading flex items-center justify-between px-5 pb-4 pt-5">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[.24em] text-primary">ENOSX / EXPLORE</p>
+            <p className="mt-1 text-sm font-semibold text-foreground">Navigate the site</p>
+          </div>
+          <span className="enosx-menu-status"><span /> MENU</span>
+        </div>
+        <nav aria-label="Mobile navigation" className="enosx-menu-links flex flex-col px-2 pb-2">
+          {nav.map((item, index) => (
             <Link
               key={item.to}
               to={item.to}
               activeOptions={{ exact: true }}
-              activeProps={{
-                className: "bg-primary/15 text-primary",
-              }}
+              activeProps={{ className: "is-active" }}
               tabIndex={menuOpen ? 0 : -1}
               onClick={() => setMenuOpen(false)}
-              className="rounded-xl px-4 py-3.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+              className="enosx-menu-link group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-muted-foreground transition-colors"
             >
-              {item.label}
+              <span className="enosx-menu-index">0{index + 1}</span>
+              <span className="flex-1">{item.label}</span>
+              <span className="enosx-menu-arrow" aria-hidden="true">↗</span>
             </Link>
           ))}
-
+        </nav>
+        <div className="enosx-menu-bottom p-3 pt-2">
           <Link
             to="/contact"
             tabIndex={menuOpen ? 0 : -1}
             onClick={() => setMenuOpen(false)}
-            className="mt-2 rounded-xl bg-primary px-4 py-3.5 text-center text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+            className="enosx-menu-cta flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold"
           >
-            Start a project
+            <span>Start a project</span>
+            <span aria-hidden="true">↗</span>
           </Link>
-        </nav>
+          <p className="px-1 pt-3 text-center text-[10px] font-medium uppercase tracking-[.16em] text-muted-foreground">Technology built in Africa, for the world.</p>
+        </div>
       </div>
     </header>
   );
