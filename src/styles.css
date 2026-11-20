@@ -936,3 +936,9 @@ footer .mx-auto ul li:hover { color: oklch(.8 .18 300); }
   .cinematic-card, main .grid > .reveal article,
   main > div.pt-14 > section.grid img { transform: none !important; }
 }
+
+/* Keep the 3D hero sphere above the page background on inner routes. */
+.cinematic-page-hero > .hero-glow { z-index: 0; }
+.cinematic-page-hero > img { z-index: -1; }
+.cinematic-page-hero > .scrim-bottom { z-index: 1; }
+.cinematic-page-hero > div.relative { position: relative; z-index: 2; }
