@@ -250,3 +250,36 @@ main section.relative.flex.min-h-\\[75svh\\] > img { filter: saturate(.8) bright
   .reveal { opacity: 1; transform: none; }
   .cinematic-card,.cinematic-card * { transform: none !important; }
 }
+
+
+/* Final responsive details for the editorial pages */
+main .max-w-5xl > .mt-12 > .reveal {
+  grid-template-columns: 7rem minmax(0,1fr);
+  align-items: start;
+  gap: 2rem;
+}
+main .max-w-5xl > .mt-12 > .reveal p { max-width: 42rem; line-height: 1.65; }
+main .max-w-5xl > .mt-12 > .reveal > div {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+}
+main .max-w-5xl > .mt-12 > .reveal > div::after {
+  width: 2rem; height: 1px; content: ""; background: var(--primary); opacity: .6;
+}
+@media (max-width: 560px) {
+  main .max-w-5xl > .mt-12 > .reveal {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    padding-top: 1.35rem;
+    padding-bottom: 1.5rem;
+  }
+  main .max-w-5xl > .mt-12 > .reveal > div { font-size: 1.55rem; }
+  main .max-w-5xl > .mt-12 > .reveal > div::after { width: 1.4rem; }
+  main .max-w-5xl { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+}
+@media (max-width: 767px) {
+  main .grid > .reveal article { padding: .55rem; }
+  main .grid > .reveal article h2 { font-size: 1.1rem; }
+  main .grid > .reveal article > p { font-size: .83rem; line-height: 1.6; }
+}
