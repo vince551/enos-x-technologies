@@ -3,11 +3,11 @@ import { Reveal } from "@/components/site";
 import { team } from "@/data/team";
 
 const portraitBackgrounds = [
-  "from-sky-500/30 via-blue-700/35 to-indigo-950",
-  "from-violet-500/35 via-indigo-700/35 to-blue-950",
-  "from-cyan-500/25 via-indigo-600/35 to-violet-950",
-  "from-blue-500/30 via-violet-700/35 to-slate-950",
-  "from-indigo-500/35 via-sky-700/30 to-purple-950",
+  "from-sky-500/25 via-blue-700/35 to-slate-950",
+  "from-cyan-500/25 via-blue-700/35 to-slate-950",
+  "from-sky-400/25 via-cyan-700/30 to-slate-950",
+  "from-blue-500/30 via-slate-700/35 to-slate-950",
+  "from-sky-500/30 via-blue-800/35 to-slate-950",
 ] as const;
 
 export const Route = createFileRoute("/team")({
