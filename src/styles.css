@@ -122,7 +122,6 @@ body::before {
 h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -.045em; text-wrap: balance; }
 p { text-wrap: pretty; }
 img, video, canvas, svg { max-width: 100%; }
-img { height: auto; }
 a, button { -webkit-tap-highlight-color: transparent; }
 button, [role="button"] { touch-action: manipulation; }
 ::selection { background: oklch(0.72 0.17 250 / 35%); color: white; }
