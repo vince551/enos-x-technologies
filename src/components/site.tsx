@@ -288,34 +288,56 @@ export function Header() {
 }
 
 export function Footer() {
+  const groups = [
+    { title: "Explore", links: [{ label: "Home", to: "/" }, { label: "Solutions", to: "/solutions" }, { label: "About us", to: "/about" }] },
+    { title: "Company", links: [{ label: "Our team", to: "/team" }, { label: "Start a project", to: "/contact" }] },
+  ] as const;
+
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:grid-cols-2 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-16 lg:py-20">
         <div>
-          <Logo />
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Technology built in Africa, for the world.
+          <Link to="/" aria-label="ENOSX Technologies home" className="inline-flex">
+            <Logo />
+          </Link>
+          <p className="mt-5 max-w-xs text-sm leading-7 text-muted-foreground">
+            Technology built in Africa, for the world. We engineer the systems that help ambitious ideas move forward.
           </p>
+          <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.03] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_var(--enosx-blue)]" />
+            Nairobi, Kenya · Working worldwide
+          </div>
         </div>
-
-        {[
-          ["Company", ["About", "Careers", "Newsroom"]],
-          ["Solutions", ["AI & Data", "Cloud", "Software"]],
-          ["Connect", ["Contact", "LinkedIn", "X / Twitter"]],
-        ].map(([title, items]) => (
-          <div key={title as string}>
-            <div className="text-sm font-semibold">{title as string}</div>
-            <ul className="mt-3 space-y-3 text-sm text-muted-foreground">
-              {(items as string[]).map((item) => (
-                <li key={item}>{item}</li>
+        {groups.map((group) => (
+          <div key={group.title}>
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">{group.title}</h2>
+            <ul className="mt-5 space-y-4 text-sm text-muted-foreground">
+              {group.links.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="inline-flex transition hover:translate-x-1 hover:text-foreground">
+                    {item.label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
         ))}
+        <div>
+          <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">Connect</h2>
+          <a href="mailto:hello@enosx.tech" className="mt-5 inline-flex text-sm text-muted-foreground hover:text-foreground">
+            hello@enosx.tech
+          </a>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">Have a challenge worth solving? Let&apos;s talk.</p>
+          <Link to="/contact" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+            Start a conversation <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </div>
-
-      <div className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} ENOSX Technologies. All rights reserved.
+      <div className="border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} ENOSX Technologies. All rights reserved.</span>
+          <span>Engineered with intent. Built for what&apos;s next.</span>
+        </div>
       </div>
     </footer>
   );
