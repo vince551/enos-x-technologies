@@ -194,7 +194,7 @@ export function Header() {
 
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex"
+          className="enosx-desktop-nav hidden items-center gap-2 text-sm font-medium text-muted-foreground md:flex"
         >
           {nav.map((item) => (
             <Link
@@ -202,7 +202,7 @@ export function Header() {
               to={item.to}
               activeOptions={{ exact: true }}
               activeProps={{ className: "text-foreground" }}
-              className="transition-colors hover:text-foreground"
+              className="rounded-full px-4 py-2.5 transition-colors hover:text-foreground"
             >
               {item.label}
             </Link>
@@ -222,7 +222,7 @@ export function Header() {
           aria-expanded={menuOpen}
           aria-controls="enosx-mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-foreground transition hover:border-primary/60 hover:bg-white/10 md:hidden"
+          className="enosx-menu-toggle flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-foreground transition hover:border-primary/60 hover:bg-white/10 md:hidden"
         >
           <span className="flex w-5 flex-col gap-[5px]">
             <span
@@ -246,7 +246,7 @@ export function Header() {
 
       <div
         id="enosx-mobile-navigation"
-        className={`enosx-mobile-menu absolute inset-x-3 top-[calc(100%+0.5rem)] overflow-hidden rounded-2xl p-3 transition-all duration-300 md:hidden ${
+        className={`enosx-mobile-menu absolute inset-x-3 top-[calc(100%+0.65rem)] overflow-hidden rounded-2xl p-3 transition-all duration-300 md:hidden ${
           menuOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-2 opacity-0"
