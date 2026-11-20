@@ -315,3 +315,81 @@ footer a:hover { color: var(--foreground); }
   .reveal { opacity: 1; transform: none; }
   .cinematic-card, .cinematic-card *, .cinematic-card::before { transform: none !important; }
 }
+
+
+/* ENOSX brand system refinements */
+.enosx-header > div {
+  min-height: 4.75rem;
+}
+.enosx-header nav[aria-label="Main navigation"] {
+  gap: .35rem;
+  padding: .35rem;
+  border: 1px solid oklch(1 0 0 / 7%);
+  border-radius: 999px;
+  background: oklch(1 0 0 / 3.5%);
+}
+.enosx-header nav[aria-label="Main navigation"] a {
+  position: relative;
+  padding: .65rem .95rem;
+  border-radius: 999px;
+  color: oklch(.76 .025 265);
+  font-size: .78rem;
+  transition: color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+.enosx-header nav[aria-label="Main navigation"] a:hover {
+  color: white;
+  background: oklch(1 0 0 / 7%);
+}
+.enosx-header nav[aria-label="Main navigation"] a[aria-current="page"] {
+  color: white;
+  background: linear-gradient(135deg, oklch(.72 .17 250 / 19%), oklch(.62 .2 292 / 16%));
+  box-shadow: inset 0 0 0 1px oklch(.72 .17 250 / 18%);
+}
+.enosx-header > div > a:last-of-type {
+  box-shadow: 0 8px 26px oklch(.62 .18 250 / 20%);
+}
+.enosx-header > div > a:last-of-type:hover {
+  box-shadow: 0 12px 34px oklch(.62 .18 250 / 32%);
+}
+.enosx-header button[aria-controls="enosx-mobile-navigation"] {
+  border-color: oklch(1 0 0 / 12%);
+  background: oklch(1 0 0 / 5%);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 6%);
+}
+.enosx-mobile-menu a[aria-current="page"] {
+  box-shadow: inset 0 0 0 1px oklch(.72 .17 250 / 18%);
+}
+.enosx-header img {
+  filter: drop-shadow(0 0 12px oklch(.72 .17 250 / 22%));
+}
+footer .mx-auto {
+  align-items: start;
+}
+footer .mx-auto > div:first-child {
+  padding-right: 1rem;
+}
+footer .mx-auto > div:not(:first-child) > div {
+  color: oklch(.93 .015 265);
+  letter-spacing: -.015em;
+}
+footer .mx-auto ul {
+  line-height: 1.8;
+}
+footer .mx-auto ul li {
+  transition: transform .2s ease, color .2s ease;
+}
+footer .mx-auto ul li:hover {
+  color: var(--foreground);
+  transform: translateX(3px);
+}
+@media (max-width: 767px) {
+  .enosx-header > div {
+    height: 4.25rem;
+  }
+  .enosx-header nav[aria-label="Main navigation"] {
+    display: none;
+  }
+  footer .mx-auto {
+    gap: 2.25rem;
+  }
+}
