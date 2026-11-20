@@ -173,6 +173,8 @@ export function Logo() {
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -183,8 +185,28 @@ export function Header() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, []);
 
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      if (menuOpen || currentY < 72) {
+        setHeaderVisible(true);
+      } else if (Math.abs(delta) > 5) {
+        setHeaderVisible(delta < 0);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen]);
+
   return (
-    <header className="enosx-header fixed inset-x-0 top-0 z-50">
+    <header className={`enosx-header fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out ${headerVisible ? "translate-y-0" : "-translate-y-full"}`}>
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           to="/"
